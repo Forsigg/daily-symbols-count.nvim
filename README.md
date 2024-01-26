@@ -20,7 +20,11 @@ local daily_symbols = require('daily-symbols-count')
 daily_symbols.setup({
     -- Put path to future stats file
     -- by default if not set - ~/.local/share/nvim/chars_count.json
-    stat_file_path = "/path/to/statfile"
+    stat_file_path = "/path/to/statfile",
+
+    -- Put date format for stats
+    -- by default if not set - %d/%m/%Y (ex. 01/01/2024)
+    date_format = "%Y %d %m"
 })
 ```
 
