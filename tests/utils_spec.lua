@@ -1,5 +1,5 @@
 local Path = require('plenary.path')
-local utils = require('daily_symbols_count.utils')
+local utils = require('daily-symbols-count.utils')
 local mock = require('luassert.mock')
 
 

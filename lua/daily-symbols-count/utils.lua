@@ -1,4 +1,4 @@
-local json = require('daily_symbols_count.json')
+local json = require('daily-symbols-count.json')
 
 local utils = {}
 -- Read file if it exists

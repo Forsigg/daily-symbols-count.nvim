@@ -1,6 +1,6 @@
 local M = {}
 
-local utils = require('daily_symbols_count.utils')
+local utils = require('daily-symbols-count.utils')
 
 local myGroup = vim.api.nvim_create_augroup('DailySymbolsGroup', { clear = true })
 
