@@ -17,11 +17,13 @@ end
 
 
 --- Get count of today inserted symbols
---- @param file_path string
+--- @param opts table
+---      file_path string (path to file)
+--       date_format string
 --- @return integer
-function utils.getTodayCount(file_path)
-    local today = os.date(DATE_FORMAT)
-    local fileContent = utils.readFileIfExist(file_path)
+function utils.getTodayCount(opts)
+    local today = os.date(opts.date_format)
+    local fileContent = utils.readFileIfExist(opts.file_path)
 
     if fileContent == nil then
         return 0
@@ -35,10 +37,12 @@ function utils.getTodayCount(file_path)
 end
 
 -- Prints daily inserted symbols count
--- @param file_path string
-function utils.printDailySymbols(file_path)
-    utils.writeCountToFile({file_path=file_path})
-    local count = utils.getTodayCount(file_path)
+-- @param opts table
+--      file_path string (path to file)
+--      date_format string
+function utils.printDailySymbols(opts)
+    utils.writeCountToFile(opts)
+    local count = utils.getTodayCount(opts)
     print("Today is " .. count .. " symbols!")
 end
 
@@ -68,10 +72,11 @@ end
 -- Write symbols count to statistics file
 -- @param opts table
 --      file_path - string (path to statistics file to be stored)
+--      date_format - string
 function utils.writeCountToFile(opts)
     local file_path = opts.file_path
     local content = utils.readFileIfExist(file_path)
-    local today = os.date(DATE_FORMAT)
+    local today = os.date(opts.date_format)
     if content[today] == nil then
         content[today] = COUNT
     else

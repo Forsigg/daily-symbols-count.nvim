@@ -6,7 +6,7 @@ local myGroup = vim.api.nvim_create_augroup('DailySymbolsGroup', { clear = true 
 
 
 DEFAULT_STATS_PATH = vim.fn.stdpath('data') .. '/chars_count.json'
-DATE_FORMAT = "%Y%m%d"
+DEFAULT_DATE_FORMAT = "%d/%m/%Y"
 COUNT = 0
 
 
@@ -16,15 +16,21 @@ COUNT = 0
 function M.setup(opts)
     local user_settings = opts or {}
     local statFilePath = DEFAULT_STATS_PATH
+    local dateFormat = DEFAULT_DATE_FORMAT
 
     if user_settings.stat_file_path then
-        statFilePath = opts.stat_file_path .. '/chars_count.json'
+        statFilePath = user_settings.stat_file_path .. '/chars_count.json'
+    end
+
+    if user_settings.date_format then
+        dateFormat = user_settings.date_format
     end
 
     utils.initStatFile(statFilePath)
 
     local writeFileOpts = {
-        file_path = statFilePath
+        file_path = statFilePath,
+        date_format = dateFormat
     }
 
     -- Add autocommand for increasing symbols count
@@ -56,7 +62,7 @@ function M.setup(opts)
     vim.api.nvim_create_user_command(
         'PrintDailySymbols',
         function()
-            utils.printDailySymbols(writeFileOpts.file_path)
+            utils.printDailySymbols(writeFileOpts)
         end,
         {
             desc="Print daily symbols count"

@@ -21,10 +21,13 @@ end)
 
 describe("test getTodayCount", function()
     it('success', function()
-        local path = Path:new('./tests/test_data/count_file.json'):absolute()
+        local test_opts = {
+            file_path = Path:new('./tests/test_data/count_file.json'):absolute(),
+            date_format = "%Y%m%d"
+        }
         local os_mock = mock(os, true)
         os_mock.date.returns("19700101")
-        local result = utils.getTodayCount(path)
+        local result = utils.getTodayCount(test_opts)
 
         assert.same(result, 10)
 
@@ -32,15 +35,21 @@ describe("test getTodayCount", function()
     end)
 
     it('today is zero symbols', function()
-        local path = Path:new('./tests/test_data/count_file.json'):absolute()
-        local result = utils.getTodayCount(path)
+        local test_opts = {
+            file_path = Path:new('./tests/test_data/count_file.json'):absolute(),
+            date_format = "%Y%m%d"
+        }
+        local result = utils.getTodayCount(test_opts)
 
         assert.same(result, 0)
     end)
 
     it('file not exists', function()
-        local path = Path:new('./tests/test_data/random_count_file.json'):absolute()
-        local result = utils.getTodayCount(path)
+        local test_opts = {
+            file_path = Path:new('./tests/test_data/random_count_file.json'):absolute(),
+            date_format = "%Y%m%d"
+        }
+        local result = utils.getTodayCount(test_opts)
 
         assert.same(result, 0)
     end)
