@@ -29,4 +29,5 @@ daily_symbols.setup({
 
 Plugin add two commands:
 `:PrintDailySymbols` - printing daily inserted symbols
+
 `:PrintDailyStats` - print whole stat file
