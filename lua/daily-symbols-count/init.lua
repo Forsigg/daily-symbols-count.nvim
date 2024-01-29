@@ -49,7 +49,7 @@ function M.setup(opts)
     vim.api.nvim_create_autocmd(
         "VimLeave",
         {
-            pattern = { "*.lua" },
+            pattern = { "*" },
             callback = function()
                 utils.writeCountToFile(writeFileOpts)
             end,
