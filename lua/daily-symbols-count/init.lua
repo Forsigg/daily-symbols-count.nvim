@@ -37,7 +37,7 @@ function M.setup(opts)
     vim.api.nvim_create_autocmd(
         "InsertCharPre",
         {
-            pattern = { "*.lua" },
+            pattern = { "*" },
             callback = function()
                 COUNT = COUNT + 1
             end,
