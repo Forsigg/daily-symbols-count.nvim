@@ -7,16 +7,20 @@ local myGroup = vim.api.nvim_create_augroup('DailySymbolsGroup', { clear = true 
 
 DEFAULT_STATS_PATH = vim.fn.stdpath('data') .. '/chars_count.json'
 DEFAULT_DATE_FORMAT = "%d/%m/%Y"
+DEFAULT_FILE_PATTERN = "*"
 COUNT = 0
 
 
 -- Setup function for plugin
 --- @param opts table
 ---      stat_file_path - string (path to statistics file to be stored)
+---      date_format - string
+---      file_pattern - string
 function M.setup(opts)
     local user_settings = opts or {}
     local statFilePath = DEFAULT_STATS_PATH
     local dateFormat = DEFAULT_DATE_FORMAT
+    local filePattern = DEFAULT_FILE_PATTERN
 
     if user_settings.stat_file_path then
         statFilePath = user_settings.stat_file_path .. '/chars_count.json'
@@ -24,6 +28,10 @@ function M.setup(opts)
 
     if user_settings.date_format then
         dateFormat = user_settings.date_format
+    end
+
+    if user_settings.file_pattern then
+        filePattern = user_settings.file_pattern
     end
 
     utils.initStatFile(statFilePath)
@@ -37,7 +45,7 @@ function M.setup(opts)
     vim.api.nvim_create_autocmd(
         "InsertCharPre",
         {
-            pattern = { "*" },
+            pattern = { filePattern },
             callback = function()
                 COUNT = COUNT + 1
             end,
@@ -49,7 +57,7 @@ function M.setup(opts)
     vim.api.nvim_create_autocmd(
         "VimLeave",
         {
-            pattern = { "*" },
+            pattern = { filePattern },
             callback = function()
                 utils.writeCountToFile(writeFileOpts)
             end,

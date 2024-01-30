@@ -24,7 +24,11 @@ daily_symbols.setup({
 
     -- Put date format for stats
     -- by default if not set - %d/%m/%Y (ex. 01/01/2024)
-    date_format = "%Y %d %m"
+    date_format = "%Y %d %m",
+
+    -- Put file format for counting inserted symbols
+    -- by default if not set - * (wildcard, all file formats)
+    file_format = "*.lua"
 })
 ```
 
