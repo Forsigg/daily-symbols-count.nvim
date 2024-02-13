@@ -41,9 +41,9 @@ end
 --      file_path string (path to file)
 --      date_format string
 function utils.printDailySymbols(opts)
-    utils.writeCountToFile(opts)
+    -- utils.writeCountToFile(opts)
     local count = utils.getTodayCount(opts)
-    print("Today is " .. count .. " symbols!")
+    print("Today is " .. count + COUNT .. " symbols!")
 end
 
 
