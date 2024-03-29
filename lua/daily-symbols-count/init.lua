@@ -34,12 +34,15 @@ function M.setup(opts)
         filePattern = user_settings.file_pattern
     end
 
+
     utils.initStatFile(statFilePath)
 
     local writeFileOpts = {
         file_path = statFilePath,
         date_format = dateFormat
     }
+
+    M.opts = writeFileOpts
 
     -- Add autocommand for increasing symbols count
     vim.api.nvim_create_autocmd(
@@ -88,6 +91,10 @@ function M.setup(opts)
             desc="Print all stats file"
         }
     )
+end
+
+function M.get_stats_count()
+    return utils.getTodayCount(M.opts)
 end
 
 return M
