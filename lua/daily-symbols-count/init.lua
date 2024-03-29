@@ -91,10 +91,11 @@ function M.setup(opts)
             desc="Print all stats file"
         }
     )
+
+    M.get_stats_count = function()
+        return utils.getTodayCount(M.opts)
+    end
 end
 
-function M.get_stats_count()
-    return utils.getTodayCount(M.opts)
-end
 
 return M
